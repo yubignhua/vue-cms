@@ -200,10 +200,10 @@
         rules: {
           goods_name:[{required: true, message: '请选择血压健康', trigger: 'change', type: 'string' }],
           pay_type:[
-            { required: true},
+            { required: true,message: '请选购买方式'},
           ],
           pay_time:[
-            { required: true},
+            { required: true,message: '请选择购买日期'},
           ],
 
           phone: [

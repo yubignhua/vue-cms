@@ -4,8 +4,10 @@ const utils = require('./utils');
 const config = require('../config');
 const vueLoaderConfig = require('./vue-loader.conf');
 const webpack = require('webpack')
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 //const vuxLoader = require('vux-loader');
+
 
 
 function resolve (dir) {
@@ -94,6 +96,15 @@ module.exports = {
           {loader: "css-loader"}, // translates CSS into CommonJS
           {loader: "less-loader"} // compiles Less to CSS
         ]
+      },
+      {
+        test: /\.scss$/,
+        //exclude: /(node_modules|bower_components)/,
+        //use: ['style-loader','css-loader',"sass-loader",'postcss-loader']
+        use:ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader','sass-loader','postcss-loader'],
+        })
       },
     ]
   },

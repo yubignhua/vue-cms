@@ -2,7 +2,7 @@
   <div class="upload">
 
     <div class="container">
-      <div ref="file_name" class="url_box file_name"></div>
+      <div ref="file_name" id="file_name" class="url_box file_name"></div>
       <el-button-group style="float: right;">
         <div class="c_item"><el-button type="primary" @click="startUpload">上传<i class="el-icon-upload el-icon--right"></i></el-button></div>
         <div class="c_item"><el-button type="primary" @click="selectFile">文件<i class="el-icon-plus el-icon--right"></i></el-button></div>
@@ -68,11 +68,13 @@
           },
           next: function(res) {
           	console.log('next:::',res.total.percent);
-            that.percent = res.total.percent;
+            that.percent = Math.floor(res.total.percent);
           },
-          complete(res) {
+          complete(key,res) {
+          	console.log("七牛 complete 回调::::::::::",res);
+          	console.log("七牛 key 回调::::::::::",key);
             if (res.success) {
-              data = { url: res.img_url };
+              data = { url: res.img_url,fileName:key };
               that.$emit('complete',data);
               that.isShowProgress = false;
               $(that.$refs.file_name).empty() ;
@@ -97,7 +99,7 @@
               case 'sizeError':tips = '图片最大不超过10M';break;
               default:tips = err.message;break
             }
-            console.log(':::::::err::::::',err)
+            console.log('七牛 error 回调::::::',err)
             Message({
               message: tips + err,
               type: 'error',
@@ -108,9 +110,10 @@
       },
 
       clearFile(){
+        var file = this.$refs.my_upload_input ;
+        file.value = '';
         this.isShowProgress = false;
         $(this.$refs.file_name).empty() ;
-
       },
 
       selectFile(){

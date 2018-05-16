@@ -228,7 +228,7 @@
        */
       async submitEditForm(){
         let that = this;
-        console.log('------',that.editForm);
+        //console.log('------',that.editForm);
         this.editForm.goods_name = `血压健康${this.editForm.goods_name}个月`;
         const valid = await new Promise((resolve, reject) => {
           that.$refs.editForm.validate( valid => valid ? resolve(valid) : reject(valid))
@@ -263,7 +263,7 @@
        * @param formName
        */
       async onSearchSubmit(formName) {
-      	console.log('this.formInline',this.formInline)
+      	//console.log('this.formInline',this.formInline)
         this.getSearchList(this.formInline)
       },
       /**
@@ -271,7 +271,7 @@
        * @param value
        */
       handleCurrentChange(value){
-      	console.log('value::::',value)
+      	//console.log('value::::',value)
         this.loading = true;
         this.formInline.curPage = value;
         this.getSearchList(this.formInline)
@@ -284,7 +284,7 @@
        */
       editRow(index, dataList) {
         let dataItem = dataList[index];
-        console.log(dataItem)
+        //console.log(dataItem)
         //更改编辑表格状态
         this.curItem = index;
         this.editForm.user_name = dataItem.user_name;

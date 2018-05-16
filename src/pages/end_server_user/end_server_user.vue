@@ -86,7 +86,7 @@
           <!--footer------------>
           <el-footer style="background: white;border-top: solid 1px #f4f4f4;">
             <div class="show_num">显示第 <span>{{getCurPage}}</span> 到第 <span>{{tableDataSize+getCurPage-1}}</span> 条记录,总共 <span>{{allPageNum}}</span> 条记录</div>
-            <el-pagination background layout="prev, pager, next" :current-page="curPage" @current-change="handleCurrentChange" :total="allPageNum"></el-pagination>
+            <el-pagination background layout="prev, pager, next" :current-page="curPage" :page-size="pagesize" @current-change="handleCurrentChange" :total="allPageNum"></el-pagination>
           </el-footer>
           <!--购买弹窗-->
           <el-dialog title="购买信息" :visible.sync="dialogAddEditVisible">
@@ -162,6 +162,7 @@
     //mixins: [MixinSetInterval, MixinRouterState],
     data() {
       return {
+        pagesize:20,
         stripe : true,
         tableHeight : $('.table_container').height(),
         activeName2 : 'first',
@@ -196,10 +197,10 @@
         rules : {
           goods_name : [{required : true,message : '请选择血压健康',trigger : 'change',type : 'string'}],
           pay_type : [
-            {required : true},
+            {required : true,message:'请选择购买方式'},
           ],
           pay_time : [
-            {required : true},
+            {required : true,message:'请选择购买日期'},
           ],
           phone : [
             {required : true,message : '请填写正确的手机号码',trigger : 'blur',validator : validPhone},

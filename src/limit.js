@@ -18,6 +18,8 @@ function hasPermission(roles, permissionRoles) {
 }
 
 const whiteList = ['/login', '/authredirect'];
+
+
 /**
  * 路由登录 角色 权限控制
  */
@@ -89,4 +91,3 @@ router.afterEach(function () {
   NProgress.done()
   
 });
-//测试玩~~~~~

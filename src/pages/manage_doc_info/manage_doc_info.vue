@@ -61,12 +61,12 @@
             </template>
           </el-table-column>
           <el-table-column
-            prop="hospital"
+            prop="hospital_name"
             label="医院名称"
             min-width="100">
           </el-table-column>
           <el-table-column
-            prop="clinic"
+            prop="clinic_name"
             label="科室"
             min-width="50">
           </el-table-column>

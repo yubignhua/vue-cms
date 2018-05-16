@@ -40,15 +40,14 @@ function Qupload(options) {
         },
         error: function() {                         // 资源受限或上传失败
             // console.log(err.message)
-        }
+        },
     }
     options.mimeType ? defaults.putExtra.mimeType = options.mimeType : '';
     $.extend(true, this, defaults, options);
 
     this.target = $(this.btn) || ''; // 目标元素
     this.token = null;
-    //this.token = "yOzXJLo4fTbpHAjrvAN3iCWaUsTE1hQ9CZuxFlQG:uWTG4x55MlgvdvQLNOjSxd1CvWs=:eyJzY29wZSI6Im5ld3MtY2h1bnl1IiwiY2FsbGJhY2tGZXRjaEtleSI6MSwiZGVhZGxpbmUiOjE1MjQ3MzA3NjksImNhbGxiYWNrQm9keSI6ImtleT0kKGtleSkmdz0kKGltYWdlSW5mby53aWR0aCkmaD0kKGltYWdlSW5mby5oZWlnaHQpJmV4dD0kKGV4dCkmbWltZVR5cGU9JChtaW1lVHlwZSkiLCJjYWxsYmFja1VybCI6Imh0dHA6Ly9iaXp0ZXN0LmNodW55dS5tZS9maWxlcy9xaW5pdV9jYWxsYmFjay8ifQ=="
-  
+    //this.token = "yOzXJLo4fTbpHAjrvAN3iCWaUsTE1hQ9CZuxFlQG:K69edyy9Z5-P8vjXTNtaqPKjj6U=:eyJzY29wZSI6Im5ld3MtY2h1bnl1IiwiY2FsbGJhY2tGZXRjaEtleSI6MSwiZGVhZGxpbmUiOjE1MjU2ODI0NzYsImNhbGxiYWNrQm9keSI6ImtleT0kKGtleSkmdz0kKGltYWdlSW5mby53aWR0aCkmaD0kKGltYWdlSW5mby5oZWlnaHQpJmV4dD0kKGV4dCkmbWltZVR5cGU9JChtaW1lVHlwZSkiLCJjYWxsYmFja1VybCI6Imh0dHA6Ly9iaXp0ZXN0LmNodW55dS5tZS9maWxlcy9xaW5pdV9jYWxsYmFjay8ifQ==";
     this.observable = null;
     this.subscription = null;
     this.hasToken = false;
@@ -85,7 +84,7 @@ Qupload.prototype = {
               if(url.indexOf('pdf')!=-1){
                 this.target.parent().siblings('.mfile').attr('src',url);
               }
-              this.target.parent().siblings('.file_name').html(key);
+          this.target.parent().siblings('.file_name').html(key);
           //PDFObject.embed(url,this.target.parent().siblings("#example1") );
           if (!this.validateFile(files, file)) return;
             this.upload(file, key)
@@ -168,22 +167,24 @@ Qupload.prototype = {
         this.before({
             file: file
         });
-        var observable = qiniu.upload(file, key, this.token, this.putExtra, this.config)
+        this.key = key;
+        //this.putExtra.fname = key;
+        var observable = qiniu.upload(file, key, this.token, this.putExtra, this.config);
         // 手动控制上传,外部可访问observable
         if (!this.auto_start) {
             this.observable = observable
         } else {
           // 订阅上传
-            this.subscribe(observable)
+            this.subscribe(observable,key)
         }
     },
     // 订阅，bind改变外部事件作用域，确保在同一作用域下
     subscribe: function(observable) {
         // 手动控制上传，外部可访问subscription
         if (!this.auto_start) {
-            this.subscription = this.observable.subscribe(this.next.bind(this), this.error.bind(this), this.complete.bind(this))
+            this.subscription = this.observable.subscribe(this.next.bind(this), this.error.bind(this), this.complete.bind(this,this.key))
         } else {
-            observable.subscribe(this.next.bind(this), this.error.bind(this), this.complete.bind(this))
+            observable.subscribe(this.next.bind(this), this.error.bind(this), this.complete.bind(this,this.key))
         }
     },
     // 取消订阅

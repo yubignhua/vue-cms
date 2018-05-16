@@ -49,8 +49,9 @@
           </el-table-column>
           <el-table-column
             prop="remark"
+            :show-overflow-tooltip="true"
             label="用药备注"
-            min-width="50">
+            min-width="120">
           </el-table-column>
           <el-table-column prop="status" label="状态" min-width="50">
             <template slot-scope="scope">
@@ -165,7 +166,7 @@
           record_time:[{required:true,message: '请输入记录时间',}],
           take_drug_feq:[{required:true,message: '请输入服药频次',}],
           take_end_time:[{required:true,message: '请输入服药结束时间	',}],
-          take_start_time:[{required:true,message: '请输入take_start_time	',}],
+          take_start_time:[{required:true,message: '请输入服用开始时间',}],
         },
         dialogVisible:false,
         //新增用户弹窗开关

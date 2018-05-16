@@ -12,8 +12,6 @@ SSH_USER="chronic_disease"
 SSH_IP="10.9.89.126"
 MEDWEB_DIR=$_DEFAULT_TEST_QC_DIR
 TEST_SERVER="QC"
-
-
 # 测试服数组列表
 TEST_SERVICE=('--qc' '--biz' '--test')
 

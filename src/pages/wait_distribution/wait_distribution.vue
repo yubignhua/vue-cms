@@ -168,10 +168,10 @@
         },
         //表单检验
         rules: {
-          start_time:[{required:true,trigger:'blur'}],
-          device_sn:[{required:true}],
+          start_time:[{required:true,trigger:'blur',message: '请选择医助'}],
+          device_sn:[{required:true,message: '请选择设备SN'}],
           assistant_id:[{required:true,message: '请选择医助'}],
-          doctor_id:[{required:true}],
+          doctor_id:[{required:true,message: '请选择医生'}],
         },
         //购买用户弹窗开关
         dialogAddEditVisible:false,

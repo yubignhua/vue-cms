@@ -11,7 +11,7 @@
 
           <el-form-item>
             <el-button type="primary" icon="el-icon-search" size="small" @click="onSearchSubmit('formName')">查询</el-button>
-            <template  v-if="roles === 'admin'">
+            <template  v-if="roles[1] === 2">
               <el-button type="primary" icon="el-icon-plus" size="small" @click="dialogFormVisible = true">新增医助</el-button>
             </template>
           </el-form-item>

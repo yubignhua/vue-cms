@@ -130,15 +130,15 @@
        * 动态血压上传成功回调
        */
       upComplete(res){
-      	console.log('res.url===',res.url);
-      	this.updateBP(res.url);
+      	console.log('res.url===',res.url,res.fileName);
+      	this.updateBP(res);
       },
 
       /**
        * 动态血压上传
        */
-      async updateBP(url){
-      	const result = await this.request.post(UP_BP,{url,user_id:this.patientId});
+      async updateBP(data){
+      	const result = await this.request.post(UP_BP,{url:data.url,filename:data.fileName,user_id:this.patientId});
       	if(result.data.error_code === 0){
           this.$notify({
             type: 'success',

@@ -7,11 +7,15 @@ const baseWebpackConfig = require('./webpack.base.conf')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
+const chalk = require('chalk');
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
-console.log('dev.env',require('../config/dev.env'))
+console.log(chalk.blue('dev.env') + ' World' + chalk.red(require('../config/dev.env')));
+
+
+//console.log('dev.env',require('../config/dev.env'))
 console.log('process.HOST',process.env.HOST)
 console.log('process.PORT',process.env.PORT)
 console.log('process.env',process.env)

@@ -12,7 +12,7 @@
           v-loading="loading"
           stripe
           :data="tableData"
-          style="width:100%;margin-top: 20px;"
+          style="width:100%;"
           :max-height="tableHeight">
           <el-table-column
             prop="upload_time"
@@ -33,10 +33,12 @@
               <span v-if="scope.row.low_pressure_status === 2"><i class="el-icon-sort-up red"></i></span>
             </template>
           </el-table-column>
-          <el-table-column
-            prop="heart_rate"
-            label="心率"
-            min-width="150">
+          <el-table-column prop="heart_rate" label="心率" min-width="150">
+            <template slot-scope="scope">
+              <span>{{scope.row.heart_rate}}</span>
+              <span v-if="scope.row.heart_rate_status === 1"><i class="el-icon-sort-down i_blue"></i></span>
+              <span v-if="scope.row.heart_rate_status === 2"><i class="el-icon-sort-up red"></i></span>
+            </template>
           </el-table-column>
           <!--<el-table-column prop="status" label="状态" min-width="120">-->
             <!--<template slot-scope="scope">-->

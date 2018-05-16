@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import App from './App';
+import 'babel-polyfill';
 import router from './router/router';
 import store from './store';
 import request from './assets/mUtils/request'
@@ -22,3 +23,8 @@ new Vue({
   template: '<App/>',
   components: { App },
 });
+
+
+const chalk = require('chalk');
+
+console.log(chalk.blue('Hello world!'));

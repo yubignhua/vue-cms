@@ -48,7 +48,7 @@ export default {
       commit('SET_SEARCH_PAGE',data.curPage);
       const searchInfo = await request.get(SEARCHBASEINFO,{params:state.searchInfo});
       console.log('hahahaah',searchInfo);
-      searchInfo.data.total_num && commit('SAVE_ALL_PAGE_NUM',searchInfo.data.total_num);
+      searchInfo.data.total_count && commit('SAVE_ALL_PAGE_NUM',searchInfo.data.total_count);
       searchInfo.data.assistant_list && commit('SAVE_HOME_DATA', searchInfo.data.assistant_list);
       return searchInfo.data;
     }

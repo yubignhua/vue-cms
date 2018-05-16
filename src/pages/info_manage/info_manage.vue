@@ -20,7 +20,7 @@
         </div>
         <div class="text item">姓名: {{editForm.user_name}}</div>
         <div class="text item">性别: {{!editForm.user_sex?"":editForm.user_sex==="m"?"男":"女"}}</div>
-        <div class="text item">年龄: {{editForm.user_age}}</div>
+        <div v-if="editForm.user_age" class="text item">年龄: {{editForm.user_age}}</div>
       </el-card>
 
 
@@ -137,14 +137,20 @@
 		computed: {
       ...mapGetters(["assistentList","docList"]),
     },
+
 		mounted(){
-      this.doctorList = this.docList.map(item => {
-        return { value: item.user_id, label: item.name };
-      });
+
+			setTimeout(()=>{
+        this.doctorList = this.docList.map(item => {
+          return { value: item.user_id, label: item.name };
+    });
+
 
       this.assistants = this.assistentList.map(item => {
-        return { value: item.user_id, label: item.name };
-      });
+          return { value: item.user_id, label: item.name };
+    });
+      },1000)
+
     },
 
 	};
@@ -206,3 +212,5 @@
     }
 
 </style>
+
+

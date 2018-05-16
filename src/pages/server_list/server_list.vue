@@ -4,7 +4,7 @@
     <el-main>
       <!--头部搜索表单------------>
       <div class="dr_top">
-        <div class="dr_des"> {{patientInfo.user_name}}  {{patientInfo.user_sex=='m'?'男':'女'}}  {{patientInfo.user_age}}岁 <el-tag>{{patientInfo.user_custom_tags}}</el-tag> </div>
+        <div class="dr_des"> {{patientInfo.user_name}}  {{patientInfo.user_sex=='m'?'男':'女'}}  {{patientInfo.user_age}}岁 <el-tag v-if="patientInfo.user_custom_tags">{{patientInfo.user_custom_tags}}</el-tag> <el-tag v-if="patientInfo.user_remarks">{{patientInfo.user_remarks}}</el-tag></div>
         <el-button class="dr_new_drug" type="primary" icon="el-icon-plus" size="small" @click="dialogFormVisible = true">新增服务记录</el-button>
       </div>
       <!--表格数据------------>
@@ -73,9 +73,9 @@
       </div>
     </el-dialog>
 
-    <el-dialog title="详细信息" :visible.sync="detailForm">
-      <div><span>{{showServerType(detailForms.service_type)}}:</span><span style="float: right;">{{detailForms.service_time}}</span></div>
-      <div>来自:</div>
+    <el-dialog :title="showServerType(detailForms.service_type)" :visible.sync="detailForm">
+      <div><span style="float: right;">{{detailForms.service_time}}</span></div>
+      <div>来自:{{detailForms.oper_user_name}}</div>
       <div>内容: <span>{{detailForms.content}}</span></div>
 
       <div slot="footer" class="dialog-footer">
@@ -114,6 +114,7 @@
           service_time: '',
           service_type: '',
           user_id: '',
+          oper_user_name:''
         },
         //表单检验
         rules: {
@@ -218,6 +219,7 @@
         this.detailForms.service_time = row.service_time;
         this.detailForms.content = row.content;
         this.detailForms.service_type = row.service_type;
+        this.detailForms.oper_user_name = row.oper_user_name;
       },
 
       /**

@@ -270,7 +270,7 @@
         }else {
           that.$notify.error({
             title  : '错误',
-            message: res.error_msg
+            message: res.data.error_msg
           })
           }
         }
@@ -281,7 +281,7 @@
        */
       async submitEditForm(){
       	let that = this;
-        console.log('this.editForm====',this.editForm);
+        //console.log('this.editForm====',this.editForm);
         this.editForm.service_types = JSON.stringify(that.editForm.service_types);
         const valid = await new Promise((resolve, reject) => {
           that.$refs.editForm.validate( valid => valid ? resolve(valid) : reject(valid))
@@ -397,7 +397,7 @@
     mounted(){
       this.tableHeight = $('.table_container').height();
       this.getPageInfo(this.formInline.page);
-      console.log('this:::',this)
+     // console.log('this:::',this)
     }
   }
 </script>

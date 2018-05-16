@@ -1,11 +1,14 @@
 {
   "presets": [
-    ["env", {
-      "modules": false,
-      "targets": {
-        "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
-      }
-    }],
+    [
+      "env",
+      {
+        "modules": false,
+        "targets": {
+          "browsers": ["Android >= 2.1", "iOS >= 4", "ie >= 8", "firefox >= 15"]
+        }
+      }],
+    "es2015",
     "stage-2"
   ],
   "plugins": [
@@ -22,7 +25,7 @@
   ],
   "env": {
     "test": {
-      "presets": ["env", "stage-2"],
+      "presets": ["env", "es2015","stage-2"],
       "plugins": ["transform-vue-jsx", "istanbul"]
     }
   }
