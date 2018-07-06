@@ -34,12 +34,9 @@ module.exports = {
   build: {
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsPublicPath: '//dn-chunyu.qbox.me/@/',
-        //assetsPublicPath: '/cdm/', //为 测试服的公共路径
-
+    //assetsPublicPath: '/cdm/', //为 测试服的公共路径
     assetsSubDirectory: 'static/vue_cdm_cms',
-
-
-    productionSourceMap: true,
+    productionSourceMap: false,//是否生成.map 文件
     devtool: '#source-map',
     productionGzip: false,
     productionGzipExtensions: ['js', 'css'],
