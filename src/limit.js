@@ -18,6 +18,7 @@ function hasPermission(roles, permissionRoles) {
 }
 
 const whiteList = ['/login', '/authredirect'];
+let routeList = [];
 
 
 /**
@@ -28,6 +29,41 @@ router.beforeEach((to, from, next) => {
   NProgress.start();
   store.commit('updateLoadingStatus', {isLoading: true});
   store.commit('SET_FULLPATH',to.path);
+  
+  // >>>>>>>>>>>>>>>>>> 动态路由控制   >>>>>>>>>>>>>>>>>>>>>>>>>
+  let index = -1;
+  for(let i = 0; i < routeList.length; i++) {
+    if(routeList[i].name == to.name) {
+      index = i;
+      break;
+    }
+  }
+  if (index !== -1){//如果存在路由列表，则把之后的路由都删掉
+    //console.log(">>>>>>>>>>>>>>>如果存在路由列表，则把之后的路由都删掉")
+    routeList.splice(index + 1,routeList.length - index - 1);
+  } else{//如果不存在
+    console.log('to.rank>>>>>',to.meta.rank);
+    console.log('from.rank>>>>',from.meta.rank);
+    if(to.meta.name !== '登录'){
+      if(to.meta.rank === from.meta.rank){
+        //console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>同级别跳转');
+        routeList[routeList.length-1] = {"name" : to.name,"path" : to.fullPath};
+      }else if(to.meta.rank< from.meta.rank){
+        // routeList.splice(to.meta.rank-1,routeList.length - index - 1);
+        //console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>返回上一级');
+        routeList.splice(to.meta.rank-1,routeList.length - index - 1);
+        routeList.push({"name" : to.name,"path" : to.fullPath});
+      }else{
+        //console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>跳转下一级别');
+        routeList.push({"name" : to.name,"path" : to.fullPath});
+      }
+    }
+  }
+  //console.log('routeList>>>',routeList)
+  to.meta.routeList = routeList;
+  
+  // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  
   //if (getToken()){ //有 token
   if (true){ //有 token
   //if (true){ //有 token

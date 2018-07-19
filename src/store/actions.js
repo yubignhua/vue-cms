@@ -4,15 +4,15 @@
 
 import request from '../assets/mUtils/request'
 //登录
-const LOGIN = '/cdm/accounts/pc/login';
+const LOGIN = '/cdm/accounts/pc/login/';
 //登出
-const LOGINOUT ='/cdm/accounts/logout';
+const LOGINOUT ='/cdm/accounts/logout/';
 //获取医生列表
-const GETDOCLIST = '/cdm/doctor/check_list';
+const GETDOCLIST = '/cdm/doctor/check_list/';
 //获取医助列表
-const GETASSISMENTLIST = '/cdm/assistant/check_list';
+const GETASSISMENTLIST = '/cdm/assistant/check_list/';
 //获取角色
-const GETROLE = '/cdm/accounts/role';
+const GETROLE = '/cdm/accounts/role/';
 //
 const HELLO = '/cdm/hello/';
 

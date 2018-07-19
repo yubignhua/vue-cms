@@ -34,8 +34,7 @@ const routes = [
   { path: '/cdm/cdm_cms',
     component:AppContainer,
     children:[
-      //登录页
-      { path: 'login', component: Login },
+      { path: 'login',name:'登录', component: Login },
       //404页
       { path: '404', component: NoFindPage, hidden: true},
       { path: '401', component: NoMatchPage, hidden: true},
@@ -44,28 +43,23 @@ const routes = [
       { path: 'layout',
         component: LayOut,
         children:[
-          //用户基本信息页
-          { path: 'base_info', component: BaseInfo,meta: {keepAlive: true} },
-          //待支付用户
-          { path: 'await_pay_user', component: AwaitPayUser,meta: {keepAlive: false} },
-          //待分配用户
-          { path: 'wait_distribution', component: WaitDis,meta: {keepAlive: false} },
-          //医生信息填写
-          { path: 'manage_doc_info', component: ManageDoc,meta: {keepAlive: true} },
-          //医助信息填写
-          { path: 'assistant_doc', component: AssistantDoc,meta: {keepAlive: true} },
-          { path: 'end_server_user', component: EndServerUser,meta: {keepAlive: false} },
-          { path: 'in_server_user', component: InServerUser,meta: {keepAlive: false} },
-          { path: 'info_manage', component: InfoManage,meta: {keepAlive: true} },
-          //用户健康管理
-          { path: 'health_manage', component: healthManage,meta: {keepAlive: false} },
+          { path: 'base_info',name:'用户基本信息', component: BaseInfo,meta: {keepAlive: true,rank:1} },
+          { path: 'await_pay_user', name:'待支付用户',component: AwaitPayUser,meta: {keepAlive: false,rank:1 }},
+          // { path: 'ambulatory_users', component: ambulatoryUsers,meta: {keepAlive: false} },
+          { path: 'wait_distribution',name:'待分配用户', component: WaitDis,meta: {keepAlive: false,rank:1} },
+          { path: 'manage_doc_info',name:'医生信息填写', component: ManageDoc,meta: {keepAlive: true,rank:1} },
+          { path: 'assistant_doc',name:'医助信息填写', component: AssistantDoc,meta: {keepAlive: true,rank:1} },
+          { path: 'end_server_user',name:'服务结束用户', component: EndServerUser,meta: {keepAlive: false,rank:1} },
+          { path: 'in_server_user',name:'服务中用户', component: InServerUser,meta: {keepAlive: false,rank:1 }},
+          { path: 'info_manage', name:'个人信息维护',component: InfoManage,meta: {keepAlive: true,rank:1} },
+          // { path: 'health_manage', component: healthManage,meta: {keepAlive: false} },
           { path: 'healthRecord', component: healthRecord,meta: {keepAlive: false},
             children:[
-              { path: 'edit_user_info', component: editUserInfo},
-              { path: 'drug_record', component: drugRecord},
-              { path: 'recent_bp_record', component: recentBprecord},
-              { path: 'ambulatory_blood', component: ambulatoryBlood},
-              { path: 'server_list', component: serverList},
+              { path: 'edit_user_info',name:'编辑用户信息', component: editUserInfo,meta:{rank:2}},
+              { path: 'drug_record',name:'用药记录', component: drugRecord,meta:{rank:2}},
+              { path: 'recent_bp_record',name:'血压记录', component: recentBprecord,meta:{rank:2}},
+              { path: 'ambulatory_blood',name:'动态血压记录', component: ambulatoryBlood,meta:{rank:2}},
+              { path: 'server_list',name:'服务记录', component: serverList,meta:{rank:2}},
             ]
           },
         ]

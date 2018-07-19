@@ -2,6 +2,16 @@
   <div id="lay-out" class="lay-out">
     <el-header style="text-align: right; font-size: 12px">
       <div class="title"> 慢性病管理系统 CMS</div>
+
+      <div class="cdm_breadcrumb">
+        <el-breadcrumb separator="/" separator-class="el-icon-arrow-right">
+          <el-breadcrumb-item> 导航 :</el-breadcrumb-item>
+          <el-breadcrumb-item :key="item.name" v-for="item in realList" :to="item.path">{{item.name}}</el-breadcrumb-item>
+        </el-breadcrumb>
+      </div>
+
+
+
       <span>{{name}}</span>
       <el-dropdown>
         <i class="el-icon-setting" style="padding: 10px 10px;"></i>
@@ -23,6 +33,7 @@
             <el-menu-item-group>
               <el-menu-item index="/cdm/cdm_cms/layout/base_info">用户基本信息</el-menu-item>
               <el-menu-item index="/cdm/cdm_cms/layout/await_pay_user">待购买用户信息</el-menu-item>
+              <!--<el-menu-item index="/cdm/cdm_cms/layout/ambulatory_users">动态血压用户</el-menu-item>-->
               <el-menu-item index="/cdm/cdm_cms/layout/wait_distribution">待分配用户</el-menu-item>
               <el-menu-item index="/cdm/cdm_cms/layout/in_server_user">服务中用户</el-menu-item>
               <el-menu-item index="/cdm/cdm_cms/layout/end_server_user">服务结束用户</el-menu-item>
@@ -37,9 +48,11 @@
             </el-menu-item-group>
           </el-submenu>
           <el-submenu index="3">
-            <template slot="title"><i class="el-icon-setting"></i>用户医疗健康管理</template>
+            <template slot="title"><i class="el-icon-setting"></i>订单管理</template>
             <el-menu-item-group>
-              <el-menu-item index="/cdm/cdm_cms/layout/health_manage">用户健康管理</el-menu-item>
+              <!--<el-menu-item index="/cdm/cdm_cms/layout/health_manage">用户健康管理</el-menu-item>-->
+              <el-menu-item index="/cdm/cdm_cms/layout/order_management">订单中心</el-menu-item>
+              <!--<el-menu-item index="/cdm/cdm_cms/layout/refund_record">退款记录</el-menu-item>-->
             </el-menu-item-group>
           </el-submenu>
         </el-menu>
@@ -64,7 +77,8 @@
   export default {
     data() {
       return {
-      	path:'/cdm/cdm_cms/layout/base_info'
+        path:'/cdm/cdm_cms/layout/base_info',
+        realList: []
       };
     },
     methods: {
@@ -79,28 +93,40 @@
        */
       logOutEvent(){
         this.loginOut()
-          .then(res => {
-          	if(res.error_code){
-              this.$router.push({path:'/cdm/cdm_cms/login'})
-            }else{
-          		this.$notify({
-          			type:'error',
-                message:res.error_msg,
-                title:'错误'
-              })
-            }
+             .then(res => {
+          if(res.error_code){
+            this.$router.push({path:'/cdm/cdm_cms/login'})
+          }else{
+            this.$notify({
+              type:'error',
+              message:res.error_msg,
+              title:'错误'
+            })
+          }
         })
-        .catch(()=>{
-        	alert('登出失败')
+             .catch(()=>{
+          alert('登出失败')
         })
 
+      },
+
+      getRoutePath() {
+        this.realList = this.$route.meta.routeList;
       }
-
     },
-		computed: {
+    beforeRouteEnter(to,from, next) {
+      next((vm) => {
+        vm.realList = to.meta.routeList;
+      });
+    },
+    computed: {
       ...mapGetters(["name","fullPath"])
     },
+    created(){
+      this.getRoutePath();
+    },
     mounted(){
+      console.log('>>>>>>>>',this.realList)
       this.getDoctorList();
       this.getAssistentListList();
     }
@@ -108,7 +134,7 @@
 
 
 
-	};
+  };
 </script>
 <style lang="scss" rel="stylesheet/scss">
   @import '../../assets/style/mixin.scss';
@@ -123,6 +149,15 @@
     .m_item{
       margin-top: 60px;
       display: block;
+    }
+    .el-dropdown{
+      height:40px;
+    }
+    .cdm_breadcrumb{
+      float: left;
+      position: relative;
+      top:25px;
+      left:30px;
     }
 
     .router-slid-enter-active, .router-slid-leave-active {
@@ -203,7 +238,7 @@
         top:60px;
         bottom:0;
         /*.el-table{*/
-          /*overflow-x: auto;*/
+        /*overflow-x: auto;*/
         /*}*/
       }
       .top_search {

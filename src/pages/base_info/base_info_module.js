@@ -1,5 +1,5 @@
 
-const SEARCHBASEINFO = '/cdm/user/search';//查询用户基本信息
+const SEARCHBASEINFO = '/cdm/user/search/';//查询用户基本信息
 import request from '../../assets/mUtils/request'
 export default {
     namespaced: true,

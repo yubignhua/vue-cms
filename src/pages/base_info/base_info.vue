@@ -144,8 +144,8 @@
   //import {MixinSetInterval,MixinRouterState} from '../../assets/mUtils/mixin.js';
   import { getToken, setToken, removeToken } from '../../assets/mUtils/auth'
 
-  const ADDUSER = '/cdm/user/create';//修改用户基本信息
-  const EDITUSER = '/cdm/user/edit';//修改用户基本信息
+  const ADDUSER = '/cdm/user/create/';//修改用户基本信息
+  const EDITUSER = '/cdm/user/edit/';//修改用户基本信息
   import {mapState,mapActions } from 'vuex';
   import { Loading } from 'element-ui';
   import {validPhone} from '../../assets/mUtils/validate'
