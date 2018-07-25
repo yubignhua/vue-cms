@@ -8,6 +8,7 @@ import Router from 'vue-router';
 import LayOut from '../pages/layout/layout';
 import Login from '../pages/login/login';
 import AppContainer from '../pages/app_container/app_container';
+import test2 from '../pages/test2/test2';
 
 // 引入懒加载页面
 const NoFindPage = r => require.ensure([], () => r(require('../pages/errorPage/404')), '404');
@@ -27,6 +28,7 @@ const drugRecord = r => require.ensure([], () => r(require('../pages/drug_record
 const recentBprecord = r => require.ensure([], () => r(require('../pages/recent_bp_record/recent_bp_record')),'recent_bp_record');
 const ambulatoryBlood = r => require.ensure([], () => r(require('../pages/ambulatory_blood/ambulatory_blood')),'ambulatory_blood');
 const serverList = r => require.ensure([], () => r(require('../pages/server_list/server_list')),'server_list');
+// const test2 = r => require.ensure([], () => r(require('../pages/test2/test2')),'test2');
 // 配置页面路由
 const routes = [
   { path: '/cdm', redirect: 'cdm/cdm_cms/layout/base_info' },
@@ -64,6 +66,7 @@ const routes = [
           },
         ]
       },
+      {path:'test2',component:test2}
     ],
   },
 ];

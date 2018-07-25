@@ -4,7 +4,7 @@
 import request from '../assets/mUtils/request';
 
 // url
-const SEARCH_SERVICE = '/cdm/service/search';//查询服务列表信息(此接口多个页面公用)
+const SEARCH_SERVICE = '/cdm/service/search/';//查询服务列表信息(此接口多个页面公用)
 
 /**
  * 查询服务列表 根据传参数 (service_status) 的不同返回不同的列表

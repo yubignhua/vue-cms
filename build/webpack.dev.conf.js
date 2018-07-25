@@ -14,6 +14,7 @@ const portfinder = require('portfinder')
 const chalk = require('chalk');
 
 const HOST = process.env.HOST;
+console.log('process::::::::::',process);
 // 读取系统环境变量的port
 const PORT = process.env.PORT && Number(process.env.PORT)
 
