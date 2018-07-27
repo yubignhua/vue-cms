@@ -6,7 +6,7 @@ import store from './store';
 import request from './assets/mUtils/request'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-import './limit'
+//import './limit'
 
 Vue.use(ElementUI, { size: 'small' });
 Vue.config.productionTip = false;

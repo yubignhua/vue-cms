@@ -2,23 +2,21 @@
   <div class="test2">
     <div>{{a}}</div>
     <el-button type="primary" @click="changeA">主要按钮</el-button>
+    <BaseInput :title="a" @show-name="showName"></BaseInput>
   </div>
 </template>
 
 <script>
 	//import {MixinSetInterval,MixinRouterState} from '../../assets/mUtils/mixin.js';
 	//import { mapState,mapMutations,mapActions } from 'vuex'
-	//import {ToastPlugin,AlertPlugin,XHeader,Toast,Actionsheet,XButton,Group, Cell,XSwitch} from 'vux'
-	//将 vux toastPlugin 对象注入 vue组件 可以调用 toastPlugin相关方法 => this.$vux.show()
-	//Vue.use(ToastPlugin);
-	//Vue.use(AlertPlugin);
+	import BaseInput from '../../components/baseInput.vue'
 	export default {
-		//components: {Toast, XHeader,},
+		components: {BaseInput},
 		//mixins: [MixinSetInterval, MixinRouterState],
-		//props: ['goBack'],
 		data(){
 			return {
-				a:243
+        b:'11111111',
+        a:`skfskfdksdfks`,
       }
 		},
 		methods: {
@@ -27,6 +25,9 @@
 					this.a = '武瑞'
 
         },1000)
+      },
+      showName(value){
+				this.a = value
       }
     },
 		//computed: {},
